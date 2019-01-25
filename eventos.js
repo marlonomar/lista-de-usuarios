@@ -1,12 +1,17 @@
 $(document).ready(function(){
 
-
     setTimeout(() => {
         localStorage.removeItem('token')
-        localStorage.removeItem('fecha')
-    }, 1200000);
+        var token = localStorage.getItem('token');
+        console.log(token);
+        if(token == null){
+            alert("se borro el token");
+        }
+    }, 3000);
+
+   
     
-    
+    /* ------------llamda de usuarios------------*/
 
     callAjax(getUsers);
     
@@ -88,6 +93,8 @@ $(document).ready(function(){
     }
     
     }
-    
+
+
+   
     /*----fin---*/
     });
