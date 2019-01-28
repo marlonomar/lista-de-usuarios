@@ -1,21 +1,37 @@
-$(document).ready(function(){
+$(function(){
 
-    var fecha= new Date;
-    localStorage.setItem('fechaExp', fecha.getTime());
-    var fechaUsuario= localStorage.getItem('fechaExp');
-    var fechaLogin = localStorage.getItem('fecha');
-    console.log(fechaLogin);
-    console.log(fechaUsuario);
-    if ( fechaUsuario >= fechaLogin ){
-        localStorage.removeItem('token');
-        localStorage.removeItem('fecha')
-        localStorage.removeItem('fechaExp')
-        window.location = "index.html"
-        
+     /*----Sesion--- */
+    sesion();
+
+    function sesion (){
+        var fecha= new Date;
+        var fechaUsuario= fecha.getTime();
+        var fechaExpiracion = localStorage.getItem('expiracion');
+        var time = fechaExpiracion - fechaUsuario;
+        console.log(time);
+
+        if ( fechaUsuario >= fechaExpiracion ){
+            localStorage.removeItem('token');
+            localStorage.removeItem('expiracion');
+            window.location = "index.html"
+        }else{
+            setTimeout(function(){
+                localStorage.removeItem('token');
+                localStorage.removeItem('expiracion');
+                window.location = "index.html"
+            },time);
+        }
+
     }
-
-   
     
+    /* ----- boton salir-----*/
+        
+        $(".btn").click(function(){
+            localStorage.removeItem('token');
+            localStorage.removeItem('expiracion');
+            window.location = "index.html"
+        });
+
     /* ------------llamda de usuarios------------*/
 
     callAjax(getUsers);
