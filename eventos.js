@@ -1,13 +1,18 @@
 $(document).ready(function(){
 
-    setTimeout(() => {
-        localStorage.removeItem('token')
-        var token = localStorage.getItem('token');
-        console.log(token);
-        if(token == null){
-            alert("se borro el token");
-        }
-    }, 3000);
+    var fecha= new Date;
+    localStorage.setItem('fechaExp', fecha.getTime());
+    var fechaUsuario= localStorage.getItem('fechaExp');
+    var fechaLogin = localStorage.getItem('fecha');
+    console.log(fechaLogin);
+    console.log(fechaUsuario);
+    if ( fechaUsuario >= fechaLogin ){
+        localStorage.removeItem('token');
+        localStorage.removeItem('fecha')
+        localStorage.removeItem('fechaExp')
+        window.location = "index.html"
+        
+    }
 
    
     
