@@ -19,7 +19,7 @@ $(document).ready(function(){
 			//respuesta
 		}).done(function(data){
 			var fecha = new Date;
-			localStorage.setItem('expiracion',fecha.getTime() + 1*60000);
+			localStorage.setItem('expiracion',fecha.getTime() + 20*60000);
 			console.log(data)
             localStorage.setItem("token",data.token)
             var key = localStorage.getItem('token');

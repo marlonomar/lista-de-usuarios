@@ -63,59 +63,56 @@ $(function(){
     obtenerdatos();
     
     function obtenerdatos (){
-    var contenido_fila;
-    var coinsidencia;
-    var exp;
-    var codigoAscci;
+        var contenido_fila;
+        var coinsidencia;
+        var exp;
+        var codigoAscci;
     
+        $("#Buscar").keyup(function(){
+            if (!checkTeclaDel(event)) {
+                if ($(this).val().length>=1)
+                filtrar($(this).val());
+            } 
+        });
     
-    $("#Buscar").keyup(function(){
-        if (!checkTeclaDel(event)) {
-    
-            if ($(this).val().length>=1)
-            filtrar($(this).val());
+        function filtrar(cadena){
+            $('tbody tr').each(function(){
+                var todos = []
+                todos.push($(this).text())
+                                            
+                $(this).removeClass('ocultar');
+                contenido_fila=todos[0];
+                exp= new RegExp(cadena,'gi');
+                coinsidencia=contenido_fila.match(exp);
+                if (coinsidencia!=null) {
+                    
+                }else{
+                    $(this).addClass("ocultar");
+                }
+            });
+        }   
+        function mostrarfilas(){
+            $("table tbody tr").each(function(){
+                $(this).removeClass('ocultar');
+            });
         }
-        
-        });
-    
-    function filtrar(cadena){
-        $("table tbody tr").each(function(){
-            $(this).removeClass('ocultar');
-            contenido_fila=$(this).find('td:eq(1)').html();
-            exp= new RegExp(cadena,'gi');
-            coinsidencia=contenido_fila.match(exp);
-            if (coinsidencia!=null) {
-                
-            }else{
-                $(this).addClass("ocultar");
+
+        function checkTeclaDel(e){
+            codigoAscci = e.which;
+            if (codigoAscci==8) {
+                if ($("#Buscar").val().length>=1) {
+                    filtrar($("#Buscar").val());
+                }else{
+                    mostrarfilas();
+                }
+                return true;
             }
-        });
-    }
-    }
-    
-    function mostrarfilas(){
-        $("table tbody tr").each(function(){
-            $(this).removeClass('ocultar');
-        });
-    }
-    
-    function checkTeclaDel(e){
-        codigoAscci = e.which;
-        if (codigoAscci==8) {
-            if ($("#Buscar").val().length>=1) {
-                filtrar($("#Buscar").val());
-            }else{
-                mostrarfilas();
-            }
-            return true;
+            else{
+                return false;
+            }      
         }
-    else{
-        return false;
-    }
-    
-    }
 
-
+    }
    
     /*----fin---*/
     });
