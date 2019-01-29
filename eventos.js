@@ -1,8 +1,10 @@
 $(function(){
 
+    
      /*----Sesion--- */
     sesion();
-
+     
+        
     function sesion (){
         var fecha= new Date;
         var fechaUsuario= fecha.getTime();
@@ -13,11 +15,13 @@ $(function(){
         if ( fechaUsuario >= fechaExpiracion ){
             localStorage.removeItem('token');
             localStorage.removeItem('expiracion');
+            localStorage.removeItem('datos');
             window.location = "index.html"
         }else{
             setTimeout(function(){
                 localStorage.removeItem('token');
                 localStorage.removeItem('expiracion');
+                localStorage.removeItem('datos');
                 window.location = "index.html"
             },time);
         }
@@ -29,19 +33,30 @@ $(function(){
         $(".btn").click(function(){
             localStorage.removeItem('token');
             localStorage.removeItem('expiracion');
+            localStorage.removeItem('datos');
             window.location = "index.html"
         });
 
-    /* ------------llamda de usuarios------------*/
+ 
+
+    /* ------------llamada de usuarios------------*/
 
     callAjax(getUsers);
     
-  
+    
 
     function getUsers(users){
+
+      
+
         users.map(function(data){
+            
+           
             $("tbody").append("<tr><td>"+data.id+"</td><td>"+data.first_name+"</td><td>"+data.last_name+"</td><td><div ><img src="+data.avatar+" style='width:40px;border-radius:50%' class='avatares'></div></td></tr>");
+           
+            
         });
+     
     }
     
     
@@ -51,6 +66,7 @@ $(function(){
             type:"GET",
             dataType:"json",
             success:function(datos){
+                localStorage.setItem('datos',JSON.stringify(datos));
                 console.log(datos);
                 callback(datos.data);
             }
@@ -116,4 +132,6 @@ $(function(){
     }
    
     /*----fin---*/
+
+
     });

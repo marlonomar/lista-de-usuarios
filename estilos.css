@@ -35,3 +35,14 @@ div .col-md-8{
 .resaltar{
 	background:red;
 }
+
+tbody tr {
+	cursor: pointer;
+}
+
+
+input[type='text']{
+	width: 300px;
+	position:relative;
+	top: -10px;
+}
