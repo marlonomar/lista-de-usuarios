@@ -46,3 +46,13 @@ input[type='text']{
 	position:relative;
 	top: -10px;
 }
+
+nav ul li {
+	width: 25px;
+	height: 25px;
+	border: 0.5px solid #c6c6c6;
+	list-style: none;
+	display: inline;
+	float:left;
+	text-align: center;
+}

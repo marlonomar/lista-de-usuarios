@@ -50,16 +50,12 @@ $(function(){
       
 
         users.map(function(data){
-            
-           
+                       
             $("tbody").append("<tr><td>"+data.id+"</td><td>"+data.first_name+"</td><td>"+data.last_name+"</td><td><div ><img src="+data.avatar+" style='width:40px;border-radius:50%' class='avatares'></div></td></tr>");
-           
-            
+                      
         });
      
     }
-    
-    
     function callAjax(callback){
             $.ajax({
             url:"https://reqres.in/api/users?per_page=12",
