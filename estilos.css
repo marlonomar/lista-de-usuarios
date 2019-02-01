@@ -6,15 +6,18 @@ thead th{
 	
 }
 
-
+h1{
+	text-align: center;
+}
 .avatares{
+	
 	cursor:pointer;
 	}
 
 button[class="btn btn-warning"]{
 	width:300px;
 	position:relative;
-	left:30%;
+	left:35%;
 	margin-top:30px;
 	margin-bottom:30px;
 }

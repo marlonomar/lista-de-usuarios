@@ -1,9 +1,7 @@
 $(function(){
-
     
      /*----Sesion--- */
     sesion();
-     
         
     function sesion (){
         var fecha= new Date;
@@ -13,11 +11,12 @@ $(function(){
         console.log(time);
 
         if ( fechaUsuario >= fechaExpiracion ){
-            localStorage.removeItem('token');
-            localStorage.removeItem('expiracion');
-            localStorage.removeItem('datos');
-            window.location = "index.html"
-        }else{
+                localStorage.removeItem('token');
+                localStorage.removeItem('expiracion');
+                localStorage.removeItem('datos');
+                window.location = "index.html"}
+
+        else{
             setTimeout(function(){
                 localStorage.removeItem('token');
                 localStorage.removeItem('expiracion');
@@ -29,27 +28,25 @@ $(function(){
     }
     
     /* ----- boton salir-----*/
-        
+
         $(".btn").click(function(){
             localStorage.removeItem('token');
             localStorage.removeItem('expiracion');
             localStorage.removeItem('datos');
             window.location = "index.html"
         });
-
- 
-
     /* ------------llamada de usuarios------------*/
 
     callAjax(users);
     
     function users(){
           
-    var usuarios = localStorage.getItem('datos');
-    var users = JSON.parse(usuarios);
-    for(i=0;i<=users.data.length;i++){
-     $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")
-    }
+        var usuarios = localStorage.getItem('datos');
+        var users = JSON.parse(usuarios);
+
+            for(i=0;i<=users.data.length;i++){
+                $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")
+            }
     
     }
 
@@ -76,14 +73,16 @@ $(function(){
         var coinsidencia;
         var exp;
         var codigoAscci;
-    //filtrador de la barra de busqueda al ingresar un valor 
+        //filtrador de la barra de busqueda al ingresar un valor 
+
         $("#Buscar").keyup(function(){// keyup se ejecuta cuando se ingresa un valor y se suelta el cursor
             if (!checkTeclaDel(event)) {// check de la tecla del 
                 if ($(this).val().length>=1)
                 filtrar($(this).val());
             } 
         });
-    // filtro 
+
+        // filtro 
         function filtrar(cadena){
             $('table tbody tr').each(function(){
                 var todos = []
@@ -93,14 +92,16 @@ $(function(){
                 contenido_fila=todos[0];// junta todos los texto en un solo elemento para su busqueda
                 exp= new RegExp(cadena,'gi');//El constructor RegExpcrea un objeto de expresión regular para que coincida con el texto con un patrón
                 coinsidencia=contenido_fila.match(exp);
-                if (coinsidencia!=null) {
-                    
-                }else{
+                
+                if (coinsidencia!=null) {}
+                
+                else{
                     $(this).addClass("ocultar");
                 }
             });
         }   
         // cuando consigue coincidencias oculta los demas objetos
+        
         function mostrarfilas(){
             $("table tbody tr").each(function(){
                 $(this).removeClass('ocultar');
