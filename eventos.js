@@ -41,21 +41,18 @@ $(function(){
 
     /* ------------llamada de usuarios------------*/
 
-    callAjax(getUsers);
+    callAjax(users);
     
-    
-
-    function getUsers(users){
-
-      
-
-        users.map(function(data){
-                       
-            $("tbody").append("<tr><td>"+data.id+"</td><td>"+data.first_name+"</td><td>"+data.last_name+"</td><td><div ><img src="+data.avatar+" style='width:40px;border-radius:50%' class='avatares'></div></td></tr>");
-                      
-        });
-     
+    function users(){
+          
+    var usuarios = localStorage.getItem('datos');
+    var users = JSON.parse(usuarios);
+    for(i=0;i<=users.data.length;i++){
+     $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")
     }
+    
+    }
+
     function callAjax(callback){
             $.ajax({
             url:"https://reqres.in/api/users?per_page=12",
@@ -88,7 +85,7 @@ $(function(){
         });
     // filtro 
         function filtrar(cadena){
-            $('tbody tr').each(function(){
+            $('table tbody tr').each(function(){
                 var todos = []
                 todos.push($(this).text())// El método push () agrega nuevos elementos al final de una matriz y devuelve la nueva longitud.
                                             
