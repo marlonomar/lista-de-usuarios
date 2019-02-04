@@ -59,3 +59,7 @@ nav ul li {
 	float:left;
 	text-align: center;
 }
+
+thead tr th{
+	cursor: pointer;
+}

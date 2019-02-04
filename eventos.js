@@ -38,6 +38,21 @@ $(function(){
     /* ------------llamada de usuarios------------*/
 
     callAjax(users);
+
+    $("table thead tr th:eq(1)").click(function(){
+        $("tbody").empty();
+        var usuarios = localStorage.getItem('datos');
+        var users = JSON.parse(usuarios);
+        var usuarios_ord = users.data;
+        var usuariosOrdenados =usuarios_ord.map(function(use){
+	        return use.first_name
+            })
+            var data = usuariosOrdenados.sort()
+            for(i=0;i<=data.length -1;i++){
+                $("tbody").append("<tr><td>"+data[i]+"</td></tr>")
+            }
+            
+    });
     
     function users(){
           
@@ -46,8 +61,7 @@ $(function(){
 
             for(i=0;i<=users.data.length;i++){
                 $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")
-            }
-    
+            }   
     }
 
     function callAjax(callback){
@@ -101,7 +115,7 @@ $(function(){
             });
         }   
         // cuando consigue coincidencias oculta los demas objetos
-        
+
         function mostrarfilas(){
             $("table tbody tr").each(function(){
                 $(this).removeClass('ocultar');
