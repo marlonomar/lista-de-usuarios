@@ -63,3 +63,18 @@ nav ul li {
 thead tr th{
 	cursor: pointer;
 }
+
+.paginas{
+	position: relative;
+	left: 90%;
+	top: -30px;
+	
+}
+
+.paginas select{
+	cursor: pointer;
+}
+
+.paginas select option{
+	cursor: pointer;
+}

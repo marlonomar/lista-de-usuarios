@@ -1,67 +1,72 @@
 $(function(){
     
-     /*----Sesion--- */
-    sesion();
+   
+     /*----session--- */
+
+    session();
         
-    function sesion (){
-        var fecha= new Date;
-        var fechaUsuario= fecha.getTime();
-        var fechaExpiracion = localStorage.getItem('expiracion');
-        var time = fechaExpiracion - fechaUsuario;
+    function session (){
+        var date= new Date;
+        var dateStart= date.getTime();
+        var dateEnd = localStorage.getItem('timeExpiration');
+        var time = dateEnd - dateStart;
         console.log(time);
 
-        if ( fechaUsuario >= fechaExpiracion ){
-                localStorage.removeItem('token');
-                localStorage.removeItem('expiracion');
-                localStorage.removeItem('datos');
-                window.location = "index.html"}
+        if ( dateStart >= dateEnd ){
+            deleteLocalStorage ()}
 
         else{
             setTimeout(function(){
-                localStorage.removeItem('token');
-                localStorage.removeItem('expiracion');
-                localStorage.removeItem('datos');
-                window.location = "index.html"
+                deleteLocalStorage ()
             },time);
         }
-
     }
-    
-    /* ----- boton salir-----*/
+      /*----localstorage delete--- */
+      function deleteLocalStorage (){
+        localStorage.removeItem('token');
+        localStorage.removeItem('timeExpiration');
+        localStorage.removeItem('datos');
+        window.location = "index.html";
+    }
+    /* ----- button out-----*/
 
         $(".btn").click(function(){
-            localStorage.removeItem('token');
-            localStorage.removeItem('expiracion');
-            localStorage.removeItem('datos');
-            window.location = "index.html"
+            deleteLocalStorage ()
         });
-    /* ------------llamada de usuarios------------*/
+    /* ------------call users------------*/
 
     callAjax(users);
 
     $("table thead tr th:eq(1)").click(function(){
         $("tbody").empty();
-        var usuarios = localStorage.getItem('datos');
-        var users = JSON.parse(usuarios);
-        var usuarios_ord = users.data;
-        var usuariosOrdenados =usuarios_ord.map(function(use){
-	        return use.first_name
-            })
-            var data = usuariosOrdenados.sort()
-            for(i=0;i<=data.length -1;i++){
-                $("tbody").append("<tr><td>"+data[i]+"</td></tr>")
-            }
-            
+            var userStorage = localStorage.getItem('datos');
+            var users = JSON.parse(userStorage);
+            var orderedUsers = users.data;
+            var listUsers =orderedUsers.map(function(use){
+                return use.first_name});
+            var data = listUsers.sort();
+                for(i=0;i<=data.length -1;i++){
+                    $("tbody").append("<tr><td>"+data[i]+"</td></tr>")};  
+                    
+    });
+
+    $("#paginas").click(function(){
+        $("select").empty();
+            var userStorage = localStorage.getItem('datos');
+            var users = JSON.parse(userStorage);
+            var orderedUsers = users.data;
+            var listUsers =orderedUsers.map(function(use){
+                return use.id});
+            var data = listUsers;
+                for(i=0;i<=data.length -1;i++){
+                    $("select").append("<option value="+data[i]+">"+data[i]+"</option>")};  
     });
     
     function users(){
-          
-        var usuarios = localStorage.getItem('datos');
-        var users = JSON.parse(usuarios);
-
+        var userStorage = localStorage.getItem('datos');
+        var users = JSON.parse(userStorage);
             for(i=0;i<=users.data.length;i++){
-                $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")
-            }   
+                $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};   
     }
 
     function callAjax(callback){
