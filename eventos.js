@@ -1,9 +1,9 @@
 $(function(){
     
    
-     /*----session--- */
-
-    session();
+     /*----variables globales--- */
+     userStorage = localStorage.getItem('datos');
+     session();
         
     function session (){
         var date= new Date;
@@ -39,14 +39,63 @@ $(function(){
 
     $("table thead tr th:eq(1)").click(function(){
         $("tbody").empty();
-            var userStorage = localStorage.getItem('datos');
-            var users = JSON.parse(userStorage);
-            var orderedUsers = users.data;
-            var listUsers =orderedUsers.map(function(use){
-                return use.first_name});
-            var data = listUsers.sort();
-                for(i=0;i<=data.length -1;i++){
-                    $("tbody").append("<tr><td>"+data[i]+"</td></tr>")};  
+        var userStorage = localStorage.getItem('datos');
+        var users = JSON.parse(userStorage);
+        var orderedUsers = users.data;
+        var listUsers =orderedUsers.map(function(use){
+            return use.first_name});
+         var comp = listUsers.sort();
+        var resultado = listUsers.map(function(usuario){
+                return orderedUsers.filter(function(user) {
+                    return (user.first_name == usuario)
+                })[0]
+            })
+                for(i=0;i<=resultado.length -1;i++){
+                    $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
+                    
+    });
+
+    $("table thead tr th:eq(2)").click(function(){
+        $("tbody").empty();
+        var userStorage = localStorage.getItem('datos');
+        var users = JSON.parse(userStorage);
+        var orderedUsers = users.data;
+        var listUsers =orderedUsers.map(function(use){
+            return use.last_name});
+         var comp = listUsers.sort();
+        var resultado = listUsers.map(function(usuario){
+                return orderedUsers.filter(function(user) {
+                    return (user.last_name == usuario)
+                })[0]
+            })
+                for(i=0;i<=resultado.length -1;i++){
+                    $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
+                    
+    });
+
+    $("table thead tr th:eq(0)").click(function(){
+        $("tbody").empty();
+        var userStorage = localStorage.getItem('datos');
+        var users = JSON.parse(userStorage);
+        var orderedUsers = users.data;
+        var listUsers =orderedUsers.map(function(use){
+            return use.id});
+         var comp = listUsers.sort(function(prev,next){
+				if(prev > next){
+						return 1;
+					}
+				if(prev < next){
+					return -1;
+				}
+				return 0;
+			});
+        var resultado = listUsers.map(function(usuario){
+                return orderedUsers.filter(function(user) {
+                    return (user.id == usuario)
+                })[0]
+            })
+                for(i=0;i<=resultado.length -1;i++){
+                    $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
                     
     });
 
@@ -58,7 +107,7 @@ $(function(){
             var listUsers =orderedUsers.map(function(use){
                 return use.id});
             var data = listUsers;
-                for(i=0;i<=data.length -1;i++){
+                for(i=0;i<=data.length-1;i++){
                     $("select").append("<option value="+data[i]+">"+data[i]+"</option>")};  
     });
     

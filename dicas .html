@@ -1,4 +1,4 @@
-guardar datos de un arreglo en una variable para ordenarlos por alfabeticamente:
+-----guardar datos de un arreglo en una variable para ordenarlos por alfabeticamente:
 
 var usuarios = localStorage.getItem('datos');
 var users = JSON.parse(usuarios);
@@ -9,13 +9,13 @@ var usuariosOrdenados =usuarios_ord.map(function(use){
 var lista = usuariosOrdenados.sort()
 
 
-insertar datos de la variable en la lista ya creada 
+---------insertar datos de la variable en la lista ya creada 
 
 for(i=0;i<=lista.length;i++){
 	$("tbody").append("<tr><td>"+lista[i]+"</td></tr>")
 }
 
-evento click sustituyendo una columna 
+----------evento click sustituyendo una columna 
 
 $("table thead tr th:eq(1)").click(function(){
     $("tbody").empty();
@@ -32,4 +32,18 @@ $("table thead tr th:eq(1)").click(function(){
         
 });
 
+
+-------------obtener el arreglo ordenado alfabeticamente 
+
+var userStorage = localStorage.getItem('datos');
+var users = JSON.parse(userStorage);
+var orderedUsers = users.data;
+var listUsers =orderedUsers.map(function(use){
+    return use.first_name});
+ var comp = listUsers.sort();
+resultado = listUsers.map(function(usuario){
+        return orderedUsers.filter(function(user) {
+            return (user.first_name == usuario)
+        })[0]
+    })
 
