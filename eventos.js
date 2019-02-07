@@ -30,8 +30,9 @@ $(function(){
     function users(){
         var userStorage = localStorage.getItem('datos');
         var users = JSON.parse(userStorage);
-            for(i=0;i<=users.data.length;i++){
-                $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};   
+            for(i=0;i<=users.data.length -1;i++){
+                $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")}; 
+                listarUsuarios();  
     }
 
     function callAjax(callback){
@@ -76,7 +77,7 @@ $(function(){
 
      /* ------------Listar usuarios-----------------------------------------------------------------*/
 
-     listarUsuarios();
+     
 
      function listarUsuarios (){
          var userStorage = localStorage.getItem('datos');
