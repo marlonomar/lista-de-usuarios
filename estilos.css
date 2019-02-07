@@ -14,7 +14,7 @@ h1{
 	cursor:pointer;
 	}
 
-button[class="btn btn-warning"]{
+button{
 	width:300px;
 	position:relative;
 	left:35%;
@@ -64,17 +64,8 @@ thead tr th{
 	cursor: pointer;
 }
 
+
 .paginas{
 	position: relative;
-	left: 90%;
-	top: -30px;
-	
-}
-
-.paginas select{
-	cursor: pointer;
-}
-
-.paginas select option{
-	cursor: pointer;
+	left: 80%;
 }

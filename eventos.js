@@ -1,10 +1,10 @@
 $(function(){
     
    
-     /*----variables globales--- */
-     userStorage = localStorage.getItem('datos');
+     /*----Inicio de Sesion----------------------------------------------------------- */
+    
      session();
-        
+         
     function session (){
         var date= new Date;
         var dateStart= date.getTime();
@@ -21,21 +21,76 @@ $(function(){
             },time);
         }
     }
-      /*----localstorage delete--- */
+
+   
+     /*----llamada de usuarios--------------------------------------------------------------- */
+
+    callAjax(users);
+
+    function users(){
+        var userStorage = localStorage.getItem('datos');
+        var users = JSON.parse(userStorage);
+            for(i=0;i<=users.data.length;i++){
+                $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};   
+    }
+
+    function callAjax(callback){
+            $.ajax({
+            url:"https://reqres.in/api/users?per_page=12",
+            type:"GET",
+            dataType:"json",
+            success:function(datos){
+                localStorage.setItem('datos',JSON.stringify(datos));
+                console.log(datos);
+                callback(datos.data);
+            }
+        });
+    
+    }    
+
+      /*----localstorage delete----------------------------------------------------------------- */
+
       function deleteLocalStorage (){
         localStorage.removeItem('token');
         localStorage.removeItem('timeExpiration');
         localStorage.removeItem('datos');
         window.location = "index.html";
     }
-    /* ----- button out-----*/
 
-        $(".btn").click(function(){
+    /* ----- button out---------------------------------------------------------------------------*/
+
+        $(".btn:first").click(function(){
             deleteLocalStorage ()
         });
-    /* ------------call users------------*/
 
-    callAjax(users);
+    /* ------------list Users----------------------------------------------------------------------*/
+
+    $("select").on('change', function(){
+        var numero = this.value
+		$("tbody").empty();
+      var userStorage = localStorage.getItem('datos');
+        var users = JSON.parse(userStorage);
+         for(i=0;i<=numero -1;i++){
+         $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};
+    });
+
+     /* ------------Listar usuarios-----------------------------------------------------------------*/
+
+     listarUsuarios();
+
+     function listarUsuarios (){
+         var userStorage = localStorage.getItem('datos');
+                 var users = JSON.parse(userStorage);
+                 var orderedUsers = users.data;
+                 var listUsers =orderedUsers.map(function(use){
+                 return use.id});
+                 var data = listUsers;
+                 for(i=0;i<=data.length-1;i++){
+                 $("select").append("<option value="+data[i]+">"+data[i]+"</option>")};  
+     }
+         
+
+    /* ------------Ordenar por nombre -----------------------------------------------------------------*/
 
     $("table thead tr th:eq(1)").click(function(){
         $("tbody").empty();
@@ -55,6 +110,8 @@ $(function(){
                     
     });
 
+        /* ------------Ordenar por apellidos --------------------------------------------------------------*/
+
     $("table thead tr th:eq(2)").click(function(){
         $("tbody").empty();
         var userStorage = localStorage.getItem('datos');
@@ -72,6 +129,8 @@ $(function(){
                     $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
                     
     });
+
+    /* ------------Ordenar por ID--------------------------------------------------------------------------*/
 
     $("table thead tr th:eq(0)").click(function(){
         $("tbody").empty();
@@ -99,40 +158,9 @@ $(function(){
                     
     });
 
-    $("#paginas").click(function(){
-        $("select").empty();
-            var userStorage = localStorage.getItem('datos');
-            var users = JSON.parse(userStorage);
-            var orderedUsers = users.data;
-            var listUsers =orderedUsers.map(function(use){
-                return use.id});
-            var data = listUsers;
-                for(i=0;i<=data.length-1;i++){
-                    $("select").append("<option value="+data[i]+">"+data[i]+"</option>")};  
-    });
-    
-    function users(){
-        var userStorage = localStorage.getItem('datos');
-        var users = JSON.parse(userStorage);
-            for(i=0;i<=users.data.length;i++){
-                $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};   
-    }
+       
 
-    function callAjax(callback){
-            $.ajax({
-            url:"https://reqres.in/api/users?per_page=12",
-            type:"GET",
-            dataType:"json",
-            success:function(datos){
-                localStorage.setItem('datos',JSON.stringify(datos));
-                console.log(datos);
-                callback(datos.data);
-            }
-        });
-    
-    }
-    
-    /*---------filtro-----------*/
+    /*---------filtro-------------------------------------------------------------------------------------*/
     
     obtenerdatos();
     // funcion principal
@@ -193,7 +221,7 @@ $(function(){
 
     }
    
-    /*----fin---*/
+    /*----fin------------------------------------------------------------------------------------*/
 
 
     });
