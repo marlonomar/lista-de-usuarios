@@ -52,29 +52,24 @@ var resultado = listUsers.map(function(usuario){
 ---------------------------------funcion para paginacion 
 
     paginacion ()
-    function paginacion (){
+    function paginacion (num,maxRows){
        var table = '#mytable';
        $('#paginas').on('change',function(){
            $('.pagination').html()
-           var trnum = numero;
-           var maxRows = $("tbody tr").length;
-           var totalRows = numero;
            $(table + 'tr:gt(0)').each(function(){
 
-               if(trnum >= maxRows){
+               if(num == maxRows){
                    $(this).hide();
                }
-               if(trnum <= maxRows){
+               if(num < maxRows){
                    $(this).show();
+                   var listas = Math.ceil(maxRows/num);
+                   for(i=1; i<= listas ; i++){
+                       $('.pagination').append('<li data-page="'+i+'">\<span>'+ i++ +'<span class="sr-only">(current)</span>\</li>').show();
+                   }
                }
            })
-           if(totalRows == maxRows){
-               var pagenum = totalRows;
-               for(var i=1; i<=pagenum;){
-                   $('.pagination').append('<li data-page="'+i+'">\<span>'+ i++ +'<span class="sr-only">(current)</span>\</li>').show();
-               }
-
-           }
+           
            $(".pagination li:first-child").addClass('active');
            $('.pagination li').on('click',function(){
                var pageNum = $(this).attr('data-page');

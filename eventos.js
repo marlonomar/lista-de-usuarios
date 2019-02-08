@@ -67,11 +67,11 @@ $(function(){
     /* ------------list Users----------------------------------------------------------------------*/
 
     $("select").on('change', function(){
-        var numero = this.value; 
+        var numero = this.value;
 		$("tbody").empty();
       var userStorage = localStorage.getItem('datos');
         var users = JSON.parse(userStorage);
-        var listTotal = users.total;
+        var listTotal =users.total;
         paginacion(numero,listTotal)
          for(i=0;i<=numero -1;i++){
          $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};
@@ -95,6 +95,7 @@ $(function(){
     function paginacion(num,maxRows){
     $("nav ul").empty();
     var listas = Math.ceil(maxRows/num);
+    console.log(listas);
 	for(i=1; i<= listas ; i++){
 	$("nav ul").append("<li>"+i+"</li>")
     }
