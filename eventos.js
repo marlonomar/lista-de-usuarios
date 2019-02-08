@@ -2,7 +2,7 @@ $(function(){
     
    
      /*----Inicio de Sesion----------------------------------------------------------- */
-    
+
      session();
          
     function session (){
@@ -32,7 +32,7 @@ $(function(){
         var users = JSON.parse(userStorage);
             for(i=0;i<=users.data.length -1;i++){
                 $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")}; 
-                listarUsuarios();  
+                listarUsuarios();
     }
 
     function callAjax(callback){
@@ -67,7 +67,11 @@ $(function(){
     /* ------------list Users----------------------------------------------------------------------*/
 
     $("select").on('change', function(){
-        var numero = this.value
+     
+            
+ 
+        var numero = this.value;
+        paginacion(numero)
 		$("tbody").empty();
       var userStorage = localStorage.getItem('datos');
         var users = JSON.parse(userStorage);
@@ -76,7 +80,7 @@ $(function(){
     });
 
      /* ------------Listar usuarios-----------------------------------------------------------------*/
-
+    
      
 
      function listarUsuarios (){
@@ -86,11 +90,22 @@ $(function(){
                  var listUsers =orderedUsers.map(function(use){
                  return use.id});
                  var data = listUsers;
+                 var datalist = data.length;
+                 localStorage.setItem('dataList',datalist);
                  for(i=0;i<=data.length-1;i++){
                  $("select").append("<option value="+data[i]+">"+data[i]+"</option>")};  
      }
-         
-
+     /* ------------Pagination-----------------------------------------------------------------*/
+     
+    function paginacion(num){
+    $("nav ul").empty();
+	var maxRows = localStorage.getItem('dataList');
+    var listas = Math.ceil(maxRows/num);
+    console.log(listas);
+	for(i=1; i<= listas ; i++){
+	$("nav ul").append("<li>"+i+"</li>")
+    }
+}
     /* ------------Ordenar por nombre -----------------------------------------------------------------*/
 
     $("table thead tr th:eq(1)").click(function(){
@@ -159,7 +174,11 @@ $(function(){
                     
     });
 
-       
+     /*---------Paginacion-------------------------------------------------------------------------------------*/ 
+  
+    
+    
+
 
     /*---------filtro-------------------------------------------------------------------------------------*/
     
