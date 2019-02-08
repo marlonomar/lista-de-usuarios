@@ -95,9 +95,11 @@ $(function(){
     function paginacion(num,maxRows){
     $("nav ul").empty();
     var listas = Math.ceil(maxRows/num);
-    console.log(listas);
-	for(i=1; i<= listas ; i++){
-	$("nav ul").append("<li>"+i+"</li>")
+	if(num < maxRows){
+        $(this).hide();
+        for(i=1; i<= listas ; i++){
+            $("nav ul").append("<li>"+i+"</li>")
+            }
     }
 }
     /* ------------Ordenar por nombre -----------------------------------------------------------------*/
