@@ -69,3 +69,17 @@ thead tr th{
 	position: relative;
 	left: 80%;
 }
+
+nav ul li{
+	cursor: pointer;
+}
+
+nav ul li:hover{
+	background:#6F69FA;
+	color: white;
+}
+
+.active{
+	background: blue;
+	color: white;
+}

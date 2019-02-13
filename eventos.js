@@ -6,10 +6,10 @@ $(function(){
      session();
          
     function session (){
-        var date= new Date;
-        var dateStart= date.getTime();
-        var dateEnd = localStorage.getItem('timeExpiration');
-        var time = dateEnd - dateStart;
+        let date= new Date;
+        let dateStart= date.getTime();
+        let dateEnd = localStorage.getItem('timeExpiration');
+        let time = dateEnd - dateStart;
         console.log(time);
 
         if ( dateStart >= dateEnd ){
@@ -52,9 +52,7 @@ $(function(){
       /*----localstorage delete----------------------------------------------------------------- */
 
       function deleteLocalStorage (){
-        localStorage.removeItem('token');
-        localStorage.removeItem('timeExpiration');
-        localStorage.removeItem('datos');
+        localStorage.clear();
         window.location = "index.html";
     }
 
@@ -64,12 +62,12 @@ $(function(){
             deleteLocalStorage ()
         });
 
-    /* ------------list Users----------------------------------------------------------------------*/
+    /* ------------list Users in select ----------------------------------------------------------------------*/
 
     $("select").on('change', function(){
         var numero = this.value;
 		$("tbody").empty();
-      var userStorage = localStorage.getItem('datos');
+        var userStorage = localStorage.getItem('datos');
         var users = JSON.parse(userStorage);
         var listTotal =users.total;
         paginacion(numero,listTotal)
@@ -79,7 +77,7 @@ $(function(){
 
      /* ------------Listar usuarios-----------------------------------------------------------------*/
      function listarUsuarios (){
-         var userStorage = localStorage.getItem('datos');
+                 var userStorage = localStorage.getItem('datos');
                  var users = JSON.parse(userStorage);
                  var orderedUsers = users.data;
                  var listUsers =orderedUsers.map(function(use){
@@ -99,6 +97,7 @@ $(function(){
         $(this).hide();
         for(i=1; i<= listas ; i++){
             $("nav ul").append("<li>"+i+"</li>")
+            $('nav ul li:first').addClass("active");
             }
     }
 }
@@ -169,12 +168,6 @@ $(function(){
                     $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
                     
     });
-
-     /*---------Paginacion-------------------------------------------------------------------------------------*/ 
-  
-    
-    
-
 
     /*---------filtro-------------------------------------------------------------------------------------*/
     
