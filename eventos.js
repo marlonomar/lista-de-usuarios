@@ -58,7 +58,15 @@ $(function(){
             paginacion(numero,listTotal)
             for(i=0;i<=numero -1;i++){
             $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};
+            active()
     });
+    /* ------------activar------------ ---------------------------------------------------------*/
+    function active(){
+        $("nav ul li").on('click',function(){
+            $("nav ul li").removeClass('active');
+            $(this).addClass('active');
+        }); 
+    }
      /* ------------Listar usuarios--------------------------------------------------------------*/
      function listarUsuarios (){
                  var userStorage = localStorage.getItem('datos');
@@ -70,7 +78,8 @@ $(function(){
                  var datalist = data.length;
                  localStorage.setItem('dataList',datalist);
                  for(i=0;i<=data.length-1;i++){
-                 $("select").append("<option value="+data[i]+">"+data[i]+"</option>")};  
+                 $("select").append("<option value="+data[i]+">"+data[i]+"</option>")}; 
+                 
      }
      /* ------------Pagination-------------------------------------------------------------------*/ 
     function paginacion(num,maxRows){
@@ -79,12 +88,12 @@ $(function(){
                 if(num < maxRows){
                     $(this).hide();
                 for(i=1; i<= listas ; i++){
-                    $("nav ul").append("<li>"+i+"</li>")
+                    $("nav ul").append("<a href='#'><li>"+i+"</li></a>")
                     $('nav ul li:first').addClass("active");
                 }
     }
     }
-    /* ------------Ordenar por nombre -----------------------------------------------------------*/   
+    /* ------------funcion Ordenar --------------------------------------------------------------*/   
     function ordenar(valor){
         $("tbody").empty();
         var userStorage = localStorage.getItem('datos');
@@ -110,17 +119,9 @@ $(function(){
                 for(i=0;i<=resultado.length -1;i++){
                     $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
                     
-    }  
-    /* ------------Ordenar por nombre -----------------------------------------------------------*/
-    $("table thead tr th:eq(1)").click(function(){
-        ordenar("first_name");
-    });
-        /* ------------Ordenar por apellidos ----------------------------------------------------*/
-    $("table thead tr th:eq(2)").click(function(){
-       ordenar("last_name");
-    });
+    } 
     /* ------------Ordenar por ID----------------------------------------------------------------*/
-    $("table thead tr th:eq(0)").click(function(){
+     $("table thead tr th:eq(0)").click(function(){
         $("tbody").empty();
         var userStorage = localStorage.getItem('datos');
         var users = JSON.parse(userStorage);
@@ -144,7 +145,17 @@ $(function(){
                 for(i=0;i<=resultado.length -1;i++){
                     $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
                     
+    }); 
+    /* ------------Ordenar por nombre -----------------------------------------------------------*/
+    $("table thead tr th:eq(1)").click(function(){
+        ordenar("first_name");
     });
+        /* ------------Ordenar por apellidos ----------------------------------------------------*/
+    $("table thead tr th:eq(2)").click(function(){
+       ordenar("last_name");
+    });
+    /*---------filtro----------------------------------------------------------------------------*/ 
+   
     /*---------filtro----------------------------------------------------------------------------*/ 
     obtenerdatos();
     // funcion principal
