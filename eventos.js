@@ -1,10 +1,6 @@
-$(function(){
-    
-   
-     /*----Inicio de Sesion----------------------------------------------------------- */
-
-     session();
-         
+$(function(){ 
+     /*----Inicio de Sesion--------------------------------------------------------------------- */
+     session();        
     function session (){
         let date= new Date;
         let dateStart= date.getTime();
@@ -20,13 +16,9 @@ $(function(){
                 deleteLocalStorage ()
             },time);
         }
-    }
-
-   
-     /*----llamada de usuarios--------------------------------------------------------------- */
-
+    }  
+     /*----llamada de usuarios------------------------------------------------------------------ */
     callAjax(users);
-
     function users(){
         var userStorage = localStorage.getItem('datos');
         var users = JSON.parse(userStorage);
@@ -34,7 +26,6 @@ $(function(){
                 $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")}; 
                 listarUsuarios();
     }
-
     function callAjax(callback){
             $.ajax({
             url:"https://reqres.in/api/users?per_page=12",
@@ -47,35 +38,28 @@ $(function(){
             }
         });
     
-    }    
-
+    }
       /*----localstorage delete----------------------------------------------------------------- */
-
       function deleteLocalStorage (){
         localStorage.clear();
         window.location = "index.html";
     }
-
-    /* ----- button out---------------------------------------------------------------------------*/
-
-        $(".btn:first").click(function(){
+    /* ----- button out--------------------------------------------------------------------------*/
+    $(".btn:first").click(function(){
             deleteLocalStorage ()
-        });
-
-    /* ------------list Users in select ----------------------------------------------------------------------*/
-
+    });
+    /* ------------list Users in select ---------------------------------------------------------*/
     $("select").on('change', function(){
         var numero = this.value;
 		$("tbody").empty();
-        var userStorage = localStorage.getItem('datos');
-        var users = JSON.parse(userStorage);
-        var listTotal =users.total;
-        paginacion(numero,listTotal)
-         for(i=0;i<=numero -1;i++){
-         $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};
+            var userStorage = localStorage.getItem('datos');
+            var users = JSON.parse(userStorage);
+            var listTotal =users.total;
+            paginacion(numero,listTotal)
+            for(i=0;i<=numero -1;i++){
+            $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};
     });
-
-     /* ------------Listar usuarios-----------------------------------------------------------------*/
+     /* ------------Listar usuarios--------------------------------------------------------------*/
      function listarUsuarios (){
                  var userStorage = localStorage.getItem('datos');
                  var users = JSON.parse(userStorage);
@@ -88,23 +72,20 @@ $(function(){
                  for(i=0;i<=data.length-1;i++){
                  $("select").append("<option value="+data[i]+">"+data[i]+"</option>")};  
      }
-     /* ------------Pagination-----------------------------------------------------------------*/
-     
+     /* ------------Pagination-------------------------------------------------------------------*/ 
     function paginacion(num,maxRows){
-    $("nav ul").empty();
-    var listas = Math.ceil(maxRows/num);
-	if(num < maxRows){
-        $(this).hide();
-        for(i=1; i<= listas ; i++){
-            $("nav ul").append("<li>"+i+"</li>")
-            $('nav ul li:first').addClass("active");
-            }
+        $("nav ul").empty();
+            var listas = Math.ceil(maxRows/num);
+                if(num < maxRows){
+                    $(this).hide();
+                for(i=1; i<= listas ; i++){
+                    $("nav ul").append("<li>"+i+"</li>")
+                    $('nav ul li:first').addClass("active");
+                }
     }
-}
-    /* ------------Ordenar por nombre -----------------------------------------------------------------*/
-
-    
-        function ordenar(valor){
+    }
+    /* ------------Ordenar por nombre -----------------------------------------------------------*/   
+    function ordenar(valor){
         $("tbody").empty();
         var userStorage = localStorage.getItem('datos');
         var users = JSON.parse(userStorage);
@@ -129,22 +110,16 @@ $(function(){
                 for(i=0;i<=resultado.length -1;i++){
                     $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
                     
-        }
-   
-    /* ------------Ordenar por nombre -----------------------------------------------------------------*/
-
+    }  
+    /* ------------Ordenar por nombre -----------------------------------------------------------*/
     $("table thead tr th:eq(1)").click(function(){
         ordenar("first_name");
     });
-
-        /* ------------Ordenar por apellidos --------------------------------------------------------------*/
-
+        /* ------------Ordenar por apellidos ----------------------------------------------------*/
     $("table thead tr th:eq(2)").click(function(){
        ordenar("last_name");
     });
-
-    /* ------------Ordenar por ID--------------------------------------------------------------------------*/
-
+    /* ------------Ordenar por ID----------------------------------------------------------------*/
     $("table thead tr th:eq(0)").click(function(){
         $("tbody").empty();
         var userStorage = localStorage.getItem('datos');
@@ -170,9 +145,7 @@ $(function(){
                     $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
                     
     });
-
-    /*---------filtro-------------------------------------------------------------------------------------*/
-    
+    /*---------filtro----------------------------------------------------------------------------*/ 
     obtenerdatos();
     // funcion principal
     function obtenerdatos (){
@@ -230,9 +203,6 @@ $(function(){
             }      
         }
 
-    }
-   
+    }  
     /*----fin------------------------------------------------------------------------------------*/
-
-
-    });
+});
