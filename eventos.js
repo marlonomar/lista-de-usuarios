@@ -103,42 +103,44 @@ $(function(){
 }
     /* ------------Ordenar por nombre -----------------------------------------------------------------*/
 
-    $("table thead tr th:eq(1)").click(function(){
+    
+        function ordenar(valor){
         $("tbody").empty();
         var userStorage = localStorage.getItem('datos');
         var users = JSON.parse(userStorage);
         var orderedUsers = users.data;
         var listUsers =orderedUsers.map(function(use){
-            return use.first_name});
+           if(valor=="first_name"){
+                return use.first_name;
+           }if(valor=="last_name"){
+                return use.last_name;
+           }
+            });
          var comp = listUsers.sort();
         var resultado = listUsers.map(function(usuario){
                 return orderedUsers.filter(function(user) {
-                    return (user.first_name == usuario)
+                    if(valor=="first_name"){
+                        return (user.first_name == usuario);
+                    }if(valor=="last_name"){
+                        return (user.last_name == usuario);
+                    }
                 })[0]
             })
                 for(i=0;i<=resultado.length -1;i++){
                     $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
                     
+        }
+   
+    /* ------------Ordenar por nombre -----------------------------------------------------------------*/
+
+    $("table thead tr th:eq(1)").click(function(){
+        ordenar("first_name");
     });
 
         /* ------------Ordenar por apellidos --------------------------------------------------------------*/
 
     $("table thead tr th:eq(2)").click(function(){
-        $("tbody").empty();
-        var userStorage = localStorage.getItem('datos');
-        var users = JSON.parse(userStorage);
-        var orderedUsers = users.data;
-        var listUsers =orderedUsers.map(function(use){
-            return use.last_name});
-         var comp = listUsers.sort();
-        var resultado = listUsers.map(function(usuario){
-                return orderedUsers.filter(function(user) {
-                    return (user.last_name == usuario)
-                })[0]
-            })
-                for(i=0;i<=resultado.length -1;i++){
-                    $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
-                    
+       ordenar("last_name");
     });
 
     /* ------------Ordenar por ID--------------------------------------------------------------------------*/
