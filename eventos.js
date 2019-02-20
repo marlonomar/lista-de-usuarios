@@ -1,5 +1,5 @@
 $(function(){ 
-    /*----Inicio de Sesion--------------------------------------------------------------------- */
+    /*----start session--------------------------------------------------------------------*/
     session();
     boton ();
     select ();      
@@ -19,7 +19,7 @@ $(function(){
            },time);
        }
    }  
-    /*----llamada de usuarios------------------------------------------------------------------ */
+    /*----call users to table--------------------------------------------------------------*/
    callAjax(users);
    function users(){
        var userStorage = localStorage.getItem('datos');
@@ -41,18 +41,18 @@ $(function(){
        });
    
    }
-     /*----localstorage delete----------------------------------------------------------------- */
+     /*----localstorage delete-------------------------------------------------------------*/
      function deleteLocalStorage (){
        localStorage.clear();
        window.location = "index.html";
    }
-   /* ----- button out--------------------------------------------------------------------------*/
+   /* ----- button out---------------------------------------------------------------------*/
    function boton (){
        $(".btn:first").click(function(){
            deleteLocalStorage ()
    });
    }
-   /* ------------list Users in select ---------------------------------------------------------*/
+   /* ------------list Users in select ----------------------------------------------------*/
    function select (){
     var table = '#mytable';
     $("#maxRows").on('change',function(){
@@ -96,14 +96,14 @@ $(function(){
 })
 
    }
-   /* ------------activar------------ ---------------------------------------------------------*/
+   /* ------------active in the nav ------------ ------------------------------------------*/
    function active(){
        $("nav ul li").on('click',function(){
            $("nav ul li").removeClass('active');
            $(this).addClass('active');
        }); 
    }
-    /* ------------Listar usuarios--------------------------------------------------------------*/
+    /* ------------list users--------------------------------------------------------------*/
     function listarUsuarios (){
                 var userStorage = localStorage.getItem('datos');
                 var users = JSON.parse(userStorage);
@@ -119,7 +119,7 @@ $(function(){
                 
     }
 
-   /* ------------funcion Ordenar --------------------------------------------------------------*/   
+   /* ------------order function ----------------------------------------------------------*/   
    function ordenar(valor){
        $("tbody").empty();
        var userStorage = localStorage.getItem('datos');
@@ -146,7 +146,7 @@ $(function(){
                    $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>");                   
                 };                    
    } 
-   /* ------------Ordenar por ID----------------------------------------------------------------*/
+   /* ------------order for id ------------------------------------------------------------*/
     $("table thead tr th:eq(0)").click(function(){
        $("tbody").empty();
        var userStorage = localStorage.getItem('datos');
@@ -172,7 +172,7 @@ $(function(){
                    $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
                    
    }); 
-   /* ------------Ordenar por nombre -----------------------------------------------------------*/
+   /* ------------order name and surname---------------------------------------------------*/
    ordenar_lista()
    function ordenar_lista(){
        $("table thead tr th").click(function(){
@@ -186,7 +186,7 @@ $(function(){
            
         });
    }
-   /*---------filtro----------------------------------------------------------------------------*/ 
+   /*---------filter-----------------------------------------------------------------------*/ 
    obtenerdatos();
    // funcion principal
    function obtenerdatos (){
@@ -245,5 +245,5 @@ $(function(){
        }
 
    }  
-   /*----fin------------------------------------------------------------------------------------*/
+   /*----end-------------------------------------------------------------------------------*/
 });
