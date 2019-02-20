@@ -56,12 +56,10 @@ $(function(){
    function select (){
     var table = '#mytable';
     $("#maxRows").on('change',function(){
-        console.log($(this).val())
 		$(".pagination").html('');
         var trnum =0;
         var maxRows = parseInt($(this).val());
         var totalRows = $(table+' tbody tr').length;
-
         $(table+' tr:gt(0)').each(function(){
     		trnum++
         if(trnum > maxRows){
@@ -115,22 +113,12 @@ $(function(){
                 var data = listUsers;
                 var datalist = data.length;
                 localStorage.setItem('dataList',datalist);
+                $("#maxRows").prepend("<option value="+data.length+">todos</option>");
                 for(i=0;i<=data.length-1;i++){
                 $("select").append("<option value="+data[i]+">"+data[i]+"</option>")}; 
                 
     }
-    /* ------------Pagination-------------------------------------------------------------------*/ 
-   function paginacion(num,maxRows){
-       $("nav ul").empty();
-           var listas = Math.ceil(maxRows/num);
-               if(num < maxRows){
-                   $(this).hide();
-               for(i=1; i<= listas ; i++){
-                   $("nav ul").append("<a href='#'><li>"+i+"</li></a>")
-                   $('nav ul li:first').addClass("active");
-               }
-   }
-   }
+
    /* ------------funcion Ordenar --------------------------------------------------------------*/   
    function ordenar(valor){
        $("tbody").empty();
@@ -144,7 +132,7 @@ $(function(){
                return use.last_name;
           }
            });
-        var comp = listUsers.sort();
+       var comp = listUsers.sort();
        var resultado = listUsers.map(function(usuario){
                return orderedUsers.filter(function(user) {
                    if(valor=="first_name"){
@@ -153,10 +141,10 @@ $(function(){
                        return (user.last_name == usuario);
                    }
                })[0]
-           })
+           })              
                for(i=0;i<=resultado.length -1;i++){
-                   $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
-                   
+                   $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>");                   
+                };                    
    } 
    /* ------------Ordenar por ID----------------------------------------------------------------*/
     $("table thead tr th:eq(0)").click(function(){
