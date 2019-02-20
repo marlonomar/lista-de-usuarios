@@ -1,6 +1,8 @@
 $(function(){ 
      /*----Inicio de Sesion--------------------------------------------------------------------- */
-     session();        
+     session();
+     boton ();
+     select ();      
     function session (){
         let date= new Date;
         let dateStart= date.getTime();
@@ -45,21 +47,25 @@ $(function(){
         window.location = "index.html";
     }
     /* ----- button out--------------------------------------------------------------------------*/
-    $(".btn:first").click(function(){
+    function boton (){
+        $(".btn:first").click(function(){
             deleteLocalStorage ()
     });
+    }
     /* ------------list Users in select ---------------------------------------------------------*/
-    $("select").on('change', function(){
-        var numero = this.value;
-		$("tbody").empty();
-            var userStorage = localStorage.getItem('datos');
-            var users = JSON.parse(userStorage);
-            var listTotal =users.total;
-            paginacion(numero,listTotal)
-            for(i=0;i<=numero -1;i++){
-            $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};
-            active()
-    });
+    function select (){
+        $("select").on('change', function(){
+            var numero = this.value;
+            $("tbody").empty();
+                var userStorage = localStorage.getItem('datos');
+                var users = JSON.parse(userStorage);
+                var listTotal =users.total;
+                paginacion(numero,listTotal)
+                for(i=0;i<=numero -1;i++){
+                $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};
+                active()
+        });
+    }
     /* ------------activar------------ ---------------------------------------------------------*/
     function active(){
         $("nav ul li").on('click',function(){
@@ -147,13 +153,20 @@ $(function(){
                     
     }); 
     /* ------------Ordenar por nombre -----------------------------------------------------------*/
-    $("table thead tr th:eq(1)").click(function(){
-        ordenar("first_name");
-    });
-        /* ------------Ordenar por apellidos ----------------------------------------------------*/
-    $("table thead tr th:eq(2)").click(function(){
-       ordenar("last_name");
-    });
+    ordenar_lista()
+    function ordenar_lista(){
+        $("table thead tr th").click(function(){
+            var fila =$(this).text();
+            if(fila=='Nombre'){
+                ordenar('first_name');
+            }
+            if(fila=='Apellido'){
+                ordenar('last_name');
+            }
+            
+         });
+    }
+
     /*---------filtro----------------------------------------------------------------------------*/ 
    
     /*---------filtro----------------------------------------------------------------------------*/ 
