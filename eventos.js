@@ -1,10 +1,9 @@
 $(function(){ 
     /*----start session--------------------------------------------------------------------*/
     session();
-    boton ();
-    select ();  
-    ordenar_id();   
-   function session (){
+    boton();  
+     
+   function session(){
        let date= new Date;
        let dateStart= date.getTime();
        let dateEnd = localStorage.getItem('timeExpiration');
@@ -28,6 +27,12 @@ $(function(){
            for(i=0;i<=users.data.length -1;i++){
                $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")}; 
                listarUsuarios();
+               manipular_lista();
+               ordenar_lista();
+               ordenar_id();
+               select();
+               agregar_iconos();
+
    }
    function callAjax(callback){
            $.ajax({
@@ -43,18 +48,18 @@ $(function(){
    
    }
      /*----localstorage delete-------------------------------------------------------------*/
-     function deleteLocalStorage (){
+   function deleteLocalStorage(){
        localStorage.clear();
        window.location = "index.html";
    }
    /* ----- button out---------------------------------------------------------------------*/
-   function boton (){
+   function boton(){
        $(".btn:first").click(function(){
            deleteLocalStorage ()
    });
    }
    /* ------------list Users in select ----------------------------------------------------*/
-   function select (){
+   function select(){
     var table = '#mytable';
     $("#maxRows").on('change',function(){
 		$(".pagination").html('');
@@ -97,15 +102,9 @@ $(function(){
 })
 
    }
-   /* ------------active in the nav ------------ ------------------------------------------*/
-   function active(){
-       $("nav ul li").on('click',function(){
-           $("nav ul li").removeClass('active');
-           $(this).addClass('active');
-       }); 
-   }
+  
     /* ------------list users--------------------------------------------------------------*/
-    function listarUsuarios (){
+   function listarUsuarios(){
                 var userStorage = localStorage.getItem('datos');
                 var users = JSON.parse(userStorage);
                 var orderedUsers = users.data;
@@ -176,7 +175,6 @@ $(function(){
         });
     } 
    /* ------------order name and surname---------------------------------------------------*/
-   ordenar_lista()
    function ordenar_lista(){
        $("table thead tr th").click(function(){
            var fila =$(this).text();
@@ -185,8 +183,7 @@ $(function(){
            }
            if(fila=='Apellido'){
                ordenar('last_name');
-           }
-           
+           }    
         });
    }
    /*---------filter-----------------------------------------------------------------------*/ 
@@ -247,6 +244,17 @@ $(function(){
            }      
        }
 
-   }  
+   } 
+
+   function manipular_lista(){
+    $("table tbody").sortable();
+   }
+
+
+   function agregar_iconos(){
+       $("table thead tr th").append("<span class='flecha_up'><img src='https://img.icons8.com/metro/26/000000/collapse-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
+       $("table thead tr th span").eq(3).hide();
+   }
+   
    /*----the end---------------------------------------------------------------------------*/
 });
