@@ -245,15 +245,15 @@ $(function(){
        }
 
    } 
-
+   /*---------otros-----------------------------------------------------------------------*/
    function manipular_lista(){
     $("table tbody").sortable();
    }
-
-
    function agregar_iconos(){
        $("table thead tr th").append("<span class='flecha_up'><img src='https://img.icons8.com/metro/26/000000/collapse-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
        $("table thead tr th span").eq(3).hide();
+       $("table thead tr th").append("<span class='flecha_up'><img src='https://img.icons8.com/metro/26/000000/expand-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
+       $("table thead tr th span").eq(7).hide();
    }
    
    /*----the end---------------------------------------------------------------------------*/
