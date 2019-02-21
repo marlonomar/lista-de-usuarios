@@ -2,7 +2,8 @@ $(function(){
     /*----start session--------------------------------------------------------------------*/
     session();
     boton ();
-    select ();      
+    select ();  
+    ordenar_id();   
    function session (){
        let date= new Date;
        let dateStart= date.getTime();
@@ -133,7 +134,7 @@ $(function(){
           }
            });
        var comp = listUsers.sort();
-       var resultado = listUsers.map(function(usuario){
+       var resultado = comp.map(function(usuario){
                return orderedUsers.filter(function(user) {
                    if(valor=="first_name"){
                        return (user.first_name == usuario);
@@ -147,31 +148,33 @@ $(function(){
                 };                    
    } 
    /* ------------order for id ------------------------------------------------------------*/
-    $("table thead tr th:eq(0)").click(function(){
-       $("tbody").empty();
-       var userStorage = localStorage.getItem('datos');
-       var users = JSON.parse(userStorage);
-       var orderedUsers = users.data;
-       var listUsers =orderedUsers.map(function(use){
-           return use.id});
-        var comp = listUsers.sort(function(prev,next){
-               if(prev > next){
-                       return 1;
-                   }
-               if(prev < next){
-                   return -1;
-               }
-               return 0;
-           });
-       var resultado = listUsers.map(function(usuario){
-               return orderedUsers.filter(function(user) {
-                   return (user.id == usuario)
-               })[0]
-           })
-               for(i=0;i<=resultado.length -1;i++){
-                   $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
-                   
-   }); 
+    function ordenar_id(){
+        $("table thead tr th:eq(0)").click(function(){
+            $("tbody").empty();
+            var userStorage = localStorage.getItem('datos');
+            var users = JSON.parse(userStorage);
+            var orderedUsers = users.data;
+            var listUsers =orderedUsers.map(function(use){
+                return use.id});
+             var comp = listUsers.sort(function(prev,next){
+                    if(prev > next){
+                            return 1;
+                        }
+                    if(prev < next){
+                        return -1;
+                    }
+                    return 0;
+                });
+            var resultado = listUsers.map(function(usuario){
+                    return orderedUsers.filter(function(user) {
+                        return (user.id == usuario)
+                    })[0]
+                })
+                    for(i=0;i<=resultado.length -1;i++){
+                        $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
+                        
+        });
+    } 
    /* ------------order name and surname---------------------------------------------------*/
    ordenar_lista()
    function ordenar_lista(){
@@ -245,5 +248,5 @@ $(function(){
        }
 
    }  
-   /*----end-------------------------------------------------------------------------------*/
+   /*----the end---------------------------------------------------------------------------*/
 });
