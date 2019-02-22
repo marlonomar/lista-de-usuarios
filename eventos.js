@@ -75,7 +75,6 @@ $(function(){
         	$(this).show();
         }
         })
-
         if(totalRows > maxRows){
     	var pagenum = Math.ceil(totalRows/maxRows)
         for(var i=1;i<=pagenum;){
@@ -96,13 +95,11 @@ $(function(){
             else{
                 $(this).show();
             }
-        })
-      
+        })  
     })
 })
 
    }
-  
     /* ------------list users--------------------------------------------------------------*/
    function listarUsuarios(){
                 var userStorage = localStorage.getItem('datos');
@@ -144,7 +141,20 @@ $(function(){
            })              
                for(i=0;i<=resultado.length -1;i++){
                    $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>");                   
-                };                    
+                };
+            var table = '#mytable';
+            var trnum =0; 
+            var maxRows =parseInt($("select").val());
+            var totalRows = $(table+' tbody tr').length;
+            $(table+' tr:gt(0)').each(function(){
+                trnum++
+                if(trnum > maxRows){
+                    $(this).hide();
+                }
+                if(trnum <= maxRows){
+                    $(this).show();
+                }
+            })                          
    } 
    /* ------------order for id ------------------------------------------------------------*/
     function ordenar_id(){
@@ -173,6 +183,7 @@ $(function(){
                         $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
                         
         });
+        
     } 
    /* ------------order name and surname---------------------------------------------------*/
    function ordenar_lista(){
@@ -245,7 +256,7 @@ $(function(){
        }
 
    } 
-   /*---------otros-----------------------------------------------------------------------*/
+   /*---------otras funciones--------------------------------------------------------------*/
    function manipular_lista(){
     $("table tbody").sortable();
    }
