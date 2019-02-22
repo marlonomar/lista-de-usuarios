@@ -142,19 +142,8 @@ $(function(){
                for(i=0;i<=resultado.length -1;i++){
                    $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>");                   
                 };
-            var table = '#mytable';
-            var trnum =0; 
-            var maxRows =parseInt($("select").val());
-            var totalRows = $(table+' tbody tr').length;
-            $(table+' tr:gt(0)').each(function(){
-                trnum++
-                if(trnum > maxRows){
-                    $(this).hide();
-                }
-                if(trnum <= maxRows){
-                    $(this).show();
-                }
-            })                          
+                ocultar();
+                                   
    } 
    /* ------------order for id ------------------------------------------------------------*/
     function ordenar_id(){
@@ -181,7 +170,7 @@ $(function(){
                 })
                     for(i=0;i<=resultado.length -1;i++){
                         $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
-                        
+                        ocultar();      
         });
         
     } 
@@ -265,6 +254,22 @@ $(function(){
        $("table thead tr th span").eq(3).hide();
        $("table thead tr th").append("<span class='flecha_up'><img src='https://img.icons8.com/metro/26/000000/expand-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
        $("table thead tr th span").eq(7).hide();
+   }
+
+   function ocultar (){
+    var table = '#mytable';
+    var trnum =0; 
+    var maxRows =parseInt($("select").val());
+    var totalRows = $(table+' tbody tr').length;
+    $(table+' tr:gt(0)').each(function(){
+        trnum++
+        if(trnum > maxRows){
+            $(this).hide();
+        }
+        if(trnum <= maxRows){
+            $(this).show();
+        }
+    })  
    }
    
    /*----the end---------------------------------------------------------------------------*/
