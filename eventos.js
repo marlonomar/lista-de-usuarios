@@ -176,7 +176,7 @@ $(function(){
     } 
    /* ------------order name and surname---------------------------------------------------*/
    function ordenar_lista(){
-       $("table thead tr th").click(function(){
+     $("table thead tr th").click(function(){
            var fila =$(this).text();
            if(fila=='Nombre'){
                ordenar('first_name');
@@ -250,9 +250,9 @@ $(function(){
     $("table tbody").sortable();
    }
    function agregar_iconos(){
-       $("table thead tr th").append("<span class='flecha_up'><img src='https://img.icons8.com/metro/26/000000/collapse-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
+       $("table thead tr th").append("<span  class='flecha_up'><img class='flecha_arriba' src='https://img.icons8.com/metro/26/000000/collapse-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
        $("table thead tr th span").eq(3).hide();
-       $("table thead tr th").append("<span class='flecha_up'><img src='https://img.icons8.com/metro/26/000000/expand-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
+       $("table thead tr th").append("<span  class='flecha_up'><img class='flecha_abajo'src='https://img.icons8.com/metro/26/000000/expand-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
        $("table thead tr th span").eq(7).hide();
    }
 
