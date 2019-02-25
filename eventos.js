@@ -172,17 +172,23 @@ $(function(){
            if(fila=='ID'){
             ordenar('id');
            }
+           let flechas =$("table thead tr th span img");
 
            if(flecha.hasClass('arriba')){
-                flecha.attr('src','https://img.icons8.com/metro/26/000000/expand-arrow.png')
                 flecha.removeClass('arriba')
-                flecha.addClass('abajo')  
+                //feclas.attr('src','https://img.icons8.com/metro/26/000000/collapse-arrow.png')
+                flecha.addClass('abajo')
+                flecha.attr('src','https://img.icons8.com/metro/26/000000/expand-arrow.png')
+                 
            }else{
-                flecha.attr('src','https://img.icons8.com/metro/26/000000/collapse-arrow.png')
                 flecha.removeClass('abajo')
+                flechas.attr('src','https://img.icons8.com/metro/26/000000/collapse-arrow.png')
                 flecha.addClass('arriba')
+                flecha.attr('src','https://img.icons8.com/metro/26/000000/collapse-arrow.png')
+                
            }
            
+
            
         });
    }
