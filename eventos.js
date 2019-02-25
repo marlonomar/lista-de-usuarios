@@ -2,7 +2,6 @@ $(function(){
     /*----start session--------------------------------------------------------------------*/
     session();
     boton();  
-     
    function session(){
        let date= new Date;
        let dateStart= date.getTime();
@@ -24,14 +23,15 @@ $(function(){
    function users(){
        var userStorage = localStorage.getItem('datos');
        var users = JSON.parse(userStorage);
-           for(i=0;i<=users.data.length -1;i++){
-               $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")}; 
-               listarUsuarios();
-               manipular_lista();
-               ordenar_lista();
-               ordenar_id();
-               select();
-               agregar_iconos();
+        for(i=0;i<=users.data.length -1;i++){
+            $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")
+        }
+        listarUsuarios();
+        manipular_lista();
+        ordenar_id();
+        ordenar_lista();
+        select();
+        agregar_iconos();
 
    }
    function callAjax(callback){
@@ -176,14 +176,15 @@ $(function(){
     } 
    /* ------------order name and surname---------------------------------------------------*/
    function ordenar_lista(){
-     $("table thead tr th").click(function(){
-           var fila =$(this).text();
+     $("table thead tr th").on('click', '.flecha', function(){
+           var fila = $(this).closest('th').text();
            if(fila=='Nombre'){
                ordenar('first_name');
            }
            if(fila=='Apellido'){
                ordenar('last_name');
-           }    
+           }
+           $(this).attr('src','https://img.icons8.com/metro/26/000000/expand-arrow.png');
         });
    }
    /*---------filter-----------------------------------------------------------------------*/ 
@@ -250,17 +251,15 @@ $(function(){
     $("table tbody").sortable();
    }
    function agregar_iconos(){
-       $("table thead tr th").append("<span  class='flecha_up'><img class='flecha_arriba' src='https://img.icons8.com/metro/26/000000/collapse-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
+       $("table thead tr th").append("<span><img class='flecha' src='https://img.icons8.com/metro/26/000000/collapse-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
        $("table thead tr th span").eq(3).hide();
-       $("table thead tr th").append("<span  class='flecha_up'><img class='flecha_abajo'src='https://img.icons8.com/metro/26/000000/expand-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
+       //$("table thead tr th").append("<span><img class='flecha'src='https://img.icons8.com/metro/26/000000/expand-arrow.png' style='width:15px;  position: relative; left: 11px; display:none'></span>");
        $("table thead tr th span").eq(7).hide();
    }
-
    function ocultar (){
     var table = '#mytable';
     var trnum =0; 
     var maxRows =parseInt($("select").val());
-    var totalRows = $(table+' tbody tr').length;
     $(table+' tr:gt(0)').each(function(){
         trnum++
         if(trnum > maxRows){
@@ -271,6 +270,5 @@ $(function(){
         }
     })  
    }
-   
    /*----the end---------------------------------------------------------------------------*/
 });
