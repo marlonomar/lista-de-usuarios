@@ -28,7 +28,6 @@ $(function(){
         }
         listarUsuarios();
         manipular_lista();
-        ordenar_id();
         ordenar_lista();
         select();
         agregar_iconos();
@@ -128,8 +127,19 @@ $(function(){
           }if(valor=="last_name"){
                return use.last_name;
           }
+          if(valor=="id"){
+            return use.id;
+       }
            });
-       var comp = listUsers.sort();
+        var comp = listUsers.sort(function(prev,next){
+            if(prev > next){
+                    return 1;
+                }
+            if(prev < next){
+                return -1;
+            }
+            return 0;
+        });
        var resultado = comp.map(function(usuario){
                return orderedUsers.filter(function(user) {
                    if(valor=="first_name"){
@@ -137,6 +147,9 @@ $(function(){
                    }if(valor=="last_name"){
                        return (user.last_name == usuario);
                    }
+                   if(valor=="id"){
+                    return (user.id == usuario)
+                }
                })[0]
            })              
                for(i=0;i<=resultado.length -1;i++){
@@ -145,35 +158,6 @@ $(function(){
                 ocultar();
                                    
    } 
-   /* ------------order for id ------------------------------------------------------------*/
-    function ordenar_id(){
-        $("table thead tr th:eq(0)").click(function(){
-            $("tbody").empty();
-            var userStorage = localStorage.getItem('datos');
-            var users = JSON.parse(userStorage);
-            var orderedUsers = users.data;
-            var listUsers =orderedUsers.map(function(use){
-                return use.id});
-             var comp = listUsers.sort(function(prev,next){
-                    if(prev > next){
-                            return 1;
-                        }
-                    if(prev < next){
-                        return -1;
-                    }
-                    return 0;
-                });
-            var resultado = listUsers.map(function(usuario){
-                    return orderedUsers.filter(function(user) {
-                        return (user.id == usuario)
-                    })[0]
-                })
-                    for(i=0;i<=resultado.length -1;i++){
-                        $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")};  
-                        ocultar();      
-        });
-        
-    } 
    /* ------------order name and surname---------------------------------------------------*/
    function ordenar_lista(){
      $("table thead tr th").on('click', '.flecha', function(){
@@ -184,6 +168,9 @@ $(function(){
            if(fila=='Apellido'){
                ordenar('last_name');
            }
+           if(fila=='ID'){
+            ordenar('id');
+        }
            $(this).attr('src','https://img.icons8.com/metro/26/000000/expand-arrow.png');
         });
    }
