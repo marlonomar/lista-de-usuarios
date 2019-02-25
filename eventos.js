@@ -162,6 +162,7 @@ $(function(){
    function ordenar_lista(){
      $("table thead tr th").on('click', '.flecha', function(){
            var fila = $(this).closest('th').text();
+           var flecha = $(this).closest('img');
            if(fila=='Nombre'){
                ordenar('first_name');
            }
@@ -170,8 +171,19 @@ $(function(){
            }
            if(fila=='ID'){
             ordenar('id');
-        }
-           $(this).attr('src','https://img.icons8.com/metro/26/000000/expand-arrow.png');
+           }
+
+           if(flecha.hasClass('arriba')){
+                flecha.attr('src','https://img.icons8.com/metro/26/000000/expand-arrow.png')
+                flecha.removeClass('arriba')
+                flecha.addClass('abajo')  
+           }else{
+                flecha.attr('src','https://img.icons8.com/metro/26/000000/collapse-arrow.png')
+                flecha.removeClass('abajo')
+                flecha.addClass('arriba')
+           }
+           
+           
         });
    }
    /*---------filter-----------------------------------------------------------------------*/ 
@@ -238,10 +250,12 @@ $(function(){
     $("table tbody").sortable();
    }
    function agregar_iconos(){
-       $("table thead tr th").append("<span><img class='flecha' src='https://img.icons8.com/metro/26/000000/collapse-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
+       $("table thead tr th").append("<span><img class='flecha arriba' src='https://img.icons8.com/metro/26/000000/collapse-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
        $("table thead tr th span").eq(3).hide();
-       //$("table thead tr th").append("<span><img class='flecha'src='https://img.icons8.com/metro/26/000000/expand-arrow.png' style='width:15px;  position: relative; left: 11px; display:none'></span>");
+       $("table thead tr th").append("<span><img class='flecha abajo'src='https://img.icons8.com/metro/26/000000/expand-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
        $("table thead tr th span").eq(7).hide();
+       let flecha_abajo =$("table thead tr th span img.abajo");
+       flecha_abajo.hide();
    }
    function ocultar (){
     var table = '#mytable';
