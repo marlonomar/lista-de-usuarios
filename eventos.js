@@ -129,11 +129,10 @@ $(function(){
           }
           if(valor=="id"){
             return use.id;
-       }
+            }
            });
-
            if(posicion == 'arriba'){
-             var comp = listUsers.sort(function(prev,next){
+            var comp = listUsers.sort(function(prev,next){
             if(prev > next){
                     return 1;
                 }
@@ -143,7 +142,15 @@ $(function(){
             return 0;
             });
            }else{
-               var comp = listUsers.reverse();
+            var comp = listUsers.sort(function(prev,next){
+                if(prev < next){
+                        return 1;
+                    }
+                if(prev > next){
+                    return -1;
+                }
+                return 0;
+                });
            }
      
        var resultado = comp.map(function(usuario){
@@ -273,10 +280,8 @@ $(function(){
    function agregar_iconos(){
        $("table thead tr th").append("<span><img class='flecha arriba' src='https://img.icons8.com/metro/26/000000/collapse-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
        $("table thead tr th span").eq(3).hide();
-       //$("table thead tr th").append("<span><img class='flecha abajo'src='https://img.icons8.com/metro/26/000000/expand-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
        $("table thead tr th span").eq(7).hide();
-       //let flecha_abajo =$("table thead tr th span img.abajo");
-       //flecha_abajo.hide();
+       
    }
    function ocultar (){
     var table = '#mytable';
