@@ -3,14 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<title>Login</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" >
 	<link rel="stylesheet" type="text/css" href="estilos.css">
 	<link rel="stylesheet" href="jquery-ui\jquery-ui.min.css">
     <link rel="stylesheet" href="jquery-ui\jquery-ui.structure.min.css">
-    <link rel="stylesheet" href="jquery-ui\jquery-ui.theme.min.css">
+	<link rel="stylesheet" href="jquery-ui\jquery-ui.theme.min.css">
+	
 	<script src="jquery.min.js"></script>
 	<script src="eventos.js"></script>
 	<script src="jquery-ui\jquery-ui.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>users</title>
 </head>
 <body>
@@ -21,12 +23,14 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div class="bienvenidos">
+					<div class="modal fade" id="ventana">
+					
+					</div>
 				<h1>Bienvenidos</h1>
 				<button class="btn btn-warning">salir</button>
 				<div class="buscador">
 					<input type="text" name="usuarios" id="Buscar" class="form-control" placeholder="Buscar Usuarios">
 					<div class="paginas">
-						<label class="label-primary">Usuarios:</label>
 						<select id="maxRows" class="form-control" style="width:10%;display: inline-block;">
 							
 						</select>
@@ -46,6 +50,7 @@
 				</table>
 				
 			</div>
+			
 		</div>
 		<div class="col-md-2">
 			

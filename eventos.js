@@ -1,7 +1,8 @@
 $(function(){ 
     /*----start session--------------------------------------------------------------------*/
     session();
-    boton();  
+    boton();
+    obtenerdatos(); 
    function session(){
        let date= new Date;
        let dateStart= date.getTime();
@@ -24,7 +25,7 @@ $(function(){
        var userStorage = localStorage.getItem('datos');
        var users = JSON.parse(userStorage);
         for(i=0;i<=users.data.length -1;i++){
-            $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>")
+            $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><a href='#'><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></a></td></tr>")
         }
         listarUsuarios();
         manipular_lista();
@@ -166,7 +167,7 @@ $(function(){
                })[0]
            })              
                for(i=0;i<=resultado.length -1;i++){
-                   $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>");                   
+                   $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><a href='#'><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></a></td></tr>");                   
                 };
                 ocultar();
                                     
@@ -215,8 +216,6 @@ $(function(){
         });
    }
    /*---------filter-----------------------------------------------------------------------*/ 
-   obtenerdatos();
-   // funcion principal
    function obtenerdatos (){
        var contenido_fila;
        var coinsidencia;
@@ -273,16 +272,19 @@ $(function(){
        }
 
    } 
-   /*---------otras funciones--------------------------------------------------------------*/
+   /*---------manipular lista--------------------------------------------------------------*/
    function manipular_lista(){
     $("table tbody").sortable();
    }
+   /*---------agregar iconos---------------------------------------------------------------*/
    function agregar_iconos(){
        $("table thead tr th").append("<span><img class='flecha arriba' src='https://img.icons8.com/metro/26/000000/collapse-arrow.png' style='width:15px;  position: relative; left: 11px;'></span>");
        $("table thead tr th span").eq(3).hide();
        $("table thead tr th span").eq(7).hide();
+       $("img.flecha:eq(0)").attr('src','https://img.icons8.com/metro/26/000000/expand-arrow.png')
        
    }
+   /*---------ocultar ---------------------------------------------------------------------*/
    function ocultar (){
     var table = '#mytable';
     var trnum =0; 

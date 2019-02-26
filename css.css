@@ -37,3 +37,7 @@ body{
 .fecha_abajo{
 	display:none;
 }
+
+.tr_active{
+	background: yellow;
+}
