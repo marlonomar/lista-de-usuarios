@@ -116,7 +116,7 @@ $(function(){
     }
 
    /* ------------order function ----------------------------------------------------------*/   
-   function ordenar(valor){
+   function ordenar(valor,posicion){
        $("tbody").empty();
        var userStorage = localStorage.getItem('datos');
        var users = JSON.parse(userStorage);
@@ -131,7 +131,9 @@ $(function(){
             return use.id;
        }
            });
-        var comp = listUsers.sort(function(prev,next){
+
+           if(posicion == 'arriba'){
+             var comp = listUsers.sort(function(prev,next){
             if(prev > next){
                     return 1;
                 }
@@ -139,7 +141,11 @@ $(function(){
                 return -1;
             }
             return 0;
-        });
+            });
+           }else{
+               var comp = listUsers.reverse();
+           }
+     
        var resultado = comp.map(function(usuario){
                return orderedUsers.filter(function(user) {
                    if(valor=="first_name"){
@@ -163,14 +169,23 @@ $(function(){
      $("table thead tr th").on('click', '.flecha', function(){
            var fila = $(this).closest('th').text();
            var flecha = $(this).closest('img');
-           if(fila=='Nombre'){
-               ordenar('first_name');
+           if(fila=='Nombre' && flecha.hasClass('arriba')){
+               ordenar('first_name','arriba');
            }
-           if(fila=='Apellido'){
-               ordenar('last_name');
+           if(fila=='Nombre' && flecha.hasClass('abajo')){
+            ordenar('first_name','abajo');
+            }
+           if(fila=='Apellido' && flecha.hasClass('arriba')){
+               ordenar('last_name','arriba');
            }
-           if(fila=='ID'){
-            ordenar('id');
+           if(fila=='Apellido' && flecha.hasClass('abajo')){
+            ordenar('last_name','abajo');
+        }
+           if(fila=='ID' && flecha.hasClass('arriba')){
+            ordenar('id','arriba');
+           }
+           if(fila=='ID' && flecha.hasClass('abajo')){
+            ordenar('id','abajo');
            }
            let flechas =$("table thead tr th span img");
 
@@ -187,7 +202,9 @@ $(function(){
                 flechas.attr('src','https://img.icons8.com/metro/26/000000/collapse-arrow.png')
                 flechas.addClass('arriba')
                 flecha.addClass('arriba')    
-           }   
+           } 
+           
+           
         });
    }
    /*---------filter-----------------------------------------------------------------------*/ 
