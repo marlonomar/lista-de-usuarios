@@ -156,7 +156,7 @@ $(function(){
                    $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></td></tr>");                   
                 };
                 ocultar();
-                                   
+                                    
    } 
    /* ------------order name and surname---------------------------------------------------*/
    function ordenar_lista(){
