@@ -14,7 +14,7 @@ h1{
 	cursor:pointer;
 	}
 
-button{
+button.btn-warning{
 	width:300px;
 	position:relative;
 	left:35%;

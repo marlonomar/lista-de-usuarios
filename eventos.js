@@ -25,13 +25,14 @@ $(function(){
        var userStorage = localStorage.getItem('datos');
        var users = JSON.parse(userStorage);
         for(i=0;i<=users.data.length -1;i++){
-            $("tbody").append("<tr><td>"+users.data[i].id+"</td><td>"+users.data[i].first_name+"</td><td>"+users.data[i].last_name+"</td><td><a href='#'><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></a></td></tr>")
+            $("tbody").append("<tr><td class='id'>"+users.data[i].id+"</td><td class='nombre'>"+users.data[i].first_name+"</td><td class='apellido'>"+users.data[i].last_name+"</td><td class='avatar'><a href='#' data-toggle='modal' data-target='#myModal'><img src="+users.data[i].avatar+" style='width:50px; border-radius:50%;'></a></td></tr>")
         }
         listarUsuarios();
         manipular_lista();
         ordenar_lista();
         select();
         agregar_iconos();
+        modal();
 
    }
    function callAjax(callback){
@@ -167,7 +168,7 @@ $(function(){
                })[0]
            })              
                for(i=0;i<=resultado.length -1;i++){
-                   $("tbody").append("<tr><td>"+resultado[i].id+"</td><td>"+resultado[i].first_name+"</td><td>"+resultado[i].last_name+"</td><td><a href='#'><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></a></td></tr>");                   
+                   $("tbody").append("<tr><td class='id'>"+resultado[i].id+"</td><td class='nombre'>"+resultado[i].first_name+"</td><td class='apellido'>"+resultado[i].last_name+"</td><td class='avatar'><a href='#'><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></a></td></tr>");                   
                 };
                 ocultar();
                                     
@@ -298,6 +299,20 @@ $(function(){
             $(this).show();
         }
     })  
+   }
+   /*---------modal -----------------------------------------------------------------------*/
+   
+   function modal(){
+        $("table tbody tr td a img").on('click',function(){
+            var avatar =$(this).attr("src");
+            var id = $(this).closest('tr').find('td').eq(0).text();
+            var nombre = $(this).closest('tr').find('td').eq(1).text();
+            var apellido = $(this).closest('tr').find('td').eq(2).text();
+            $(".modal-header").empty();
+            $(".modal-header").append("<h2>Identificacion del Usuario</h2>");
+            $(".modal-body").empty()
+            $(".modal-body").append("<p>Nombre : "+nombre+"<p><br><p>Apellido : "+apellido+"</p><br><p>Identificacion : "+id+"</p><br><img src="+avatar+">")
+        });
    }
    /*----the end---------------------------------------------------------------------------*/
 });
