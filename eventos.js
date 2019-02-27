@@ -33,7 +33,6 @@ $(function(){
         select();
         agregar_iconos();
         modal();
-
    }
    function callAjax(callback){
            $.ajax({
@@ -107,16 +106,15 @@ $(function(){
                 var users = JSON.parse(userStorage);
                 var orderedUsers = users.data;
                 var listUsers =orderedUsers.map(function(use){
-                return use.id});
+                return use.id
+                });
                 var data = listUsers;
                 var datalist = data.length;
                 localStorage.setItem('dataList',datalist);
                 $("#maxRows").prepend("<option value="+data.length+">todos</option>");
                 for(i=0;i<=data.length-1;i++){
-                $("select").append("<option value="+data[i]+">"+data[i]+"</option>")}; 
-                
+                $("select").append("<option value="+data[i]+">"+data[i]+"</option>")};       
     }
-
    /* ------------order function ----------------------------------------------------------*/   
    function ordenar(valor,posicion){
        $("tbody").empty();
@@ -154,7 +152,6 @@ $(function(){
                 return 0;
                 });
            }
-     
        var resultado = comp.map(function(usuario){
                return orderedUsers.filter(function(user) {
                    if(valor=="first_name"){

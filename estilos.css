@@ -1,19 +1,13 @@
+
 thead th{
 	background:#9ED2FF;
 	text-align:left;
 	padding-left:50px;
 	padding-right:50px;
-	
 }
-
 h1{
 	text-align: center;
 }
-.avatares{
-	
-	cursor:pointer;
-	}
-
 button.btn-warning{
 	width:300px;
 	position:relative;
@@ -30,26 +24,25 @@ div .col-md-8{
 
 	border: 1px solid #c6c6c6;
 }
-
-.ocultar{
-	display:none;
-}
-
-.resaltar{
-	background:red;
-}
-
 tbody tr {
 	cursor: pointer;
 }
-
-
+#maxRows{
+	position: relative;
+	left:73px;
+	top:40px;
+}
 input[type='text']{
 	width: 300px;
 	position:relative;
-	top: -10px;
+	top:71px;
 }
-
+nav{
+	position: relative;
+	top:-74px;
+	left:1px;
+	overflow: hidden;
+}
 nav ul li {
 	width: 25px;
 	height: 25px;
@@ -86,12 +79,6 @@ nav ul a li {
 nav ul li:hover {
 	background: #00BDFF;
 	color: white;
-}
-
-.active{
-
-	color: white;
-	background:black;
 }
 
 img.avatar_modal{
