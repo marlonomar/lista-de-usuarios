@@ -168,9 +168,10 @@ $(function(){
                })[0]
            })              
                for(i=0;i<=resultado.length -1;i++){
-                   $("tbody").append("<tr><td class='id'>"+resultado[i].id+"</td><td class='nombre'>"+resultado[i].first_name+"</td><td class='apellido'>"+resultado[i].last_name+"</td><td class='avatar'><a href='#'><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></a></td></tr>");                   
+                   $("tbody").append("<tr><td class='id'>"+resultado[i].id+"</td><td class='nombre'>"+resultado[i].first_name+"</td><td class='apellido'>"+resultado[i].last_name+"</td><td class='avatar'><a href='#' data-toggle='modal' data-target='#myModal'><img src="+resultado[i].avatar+" style='width:50px; border-radius:50%;'></a></td></tr>");                   
                 };
                 ocultar();
+                modal()
                                     
    } 
    /* ------------order name and surname---------------------------------------------------*/
