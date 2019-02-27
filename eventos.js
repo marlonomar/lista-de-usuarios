@@ -311,7 +311,7 @@ $(function(){
             $(".modal-header").empty();
             $(".modal-header").append("<h2>Identificacion del Usuario</h2>");
             $(".modal-body").empty()
-            $(".modal-body").append("<p>Nombre : "+nombre+"<p><br><p>Apellido : "+apellido+"</p><br><p>Identificacion : "+id+"</p><br><img src="+avatar+">")
+            $(".modal-body").append("<p>Nombre : "+nombre+"<p><br><p>Apellido : "+apellido+"</p><br><p>Identificacion : "+id+"</p><img class='avatar_modal'src="+avatar+"><br><button type='button' class='btn btn-primary boton-modal' data-dismiss='modal'>Close</button>")
         });
    }
    /*----the end---------------------------------------------------------------------------*/

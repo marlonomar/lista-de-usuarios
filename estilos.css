@@ -94,3 +94,24 @@ nav ul li:hover {
 	background:black;
 }
 
+img.avatar_modal{
+	position: relative;
+	overflow: hidden;
+	left:335px;
+	top:-145px;
+	
+}
+
+.modal-body{
+	height:194px ;
+}
+
+.boton-modal{
+	position: relative;
+	left:494px;
+	top:-359px;
+}
+
+.modal-body p{
+	font-size: 18px;
+}
