@@ -235,7 +235,7 @@ $(function(){
                var todos = []
                todos.push($(this).text())// El método push () agrega nuevos elementos al final de una matriz y devuelve la nueva longitud.
                                            
-               $(this).removeClass('ocultar');
+               $(this).removeClass('ocultar_fila');
                contenido_fila=todos[0];// junta todos los texto en un solo elemento para su busqueda
                exp= new RegExp(cadena,'gi');//El constructor RegExpcrea un objeto de expresión regular para que coincida con el texto con un patrón
                coinsidencia=contenido_fila.match(exp);
@@ -243,7 +243,7 @@ $(function(){
                if (coinsidencia!=null) {}
                
                else{
-                   $(this).addClass("ocultar");
+                   $(this).addClass("ocultar_fila");
                }
            });
        }   
@@ -251,7 +251,7 @@ $(function(){
 
        function mostrarfilas(){
            $("table tbody tr").each(function(){
-               $(this).removeClass('ocultar');
+               $(this).removeClass('ocultar_fila');
            });
        }
 
