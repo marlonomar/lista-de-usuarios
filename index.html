@@ -3,29 +3,68 @@
 <head>
 	<meta charset="utf-8">
 	<title>Login</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css.css">
+	<!--enlaces externos de css-->
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<link rel="stylesheet" href="jquery-ui\jquery-ui.min.css">
+  <link rel="stylesheet" href="jquery-ui\jquery-ui.structure.min.css">
+	<link rel="stylesheet" href="jquery-ui\jquery-ui.theme.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<!--enlaces externos de javascript-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script src="jquery.min.js"></script>
-	<script src="js.js"></script>
+	<script src="eventos.js"></script>
+	<script src="jquery-ui\jquery-ui.min.js"></script>
+	<!--meta-viwport-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>users</title>
 </head>
 <body>
-	<div class="container">
+<!--contenedor principal de la tabla-->
+<div class="container">
 		<div class="row">
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
-				<div class="login">
-					<form>
-						<h1>Acceso</h1>
-						<input type="email" name="email" id="email" placeholder="ingrese su email:" class="form-control">
-						<input type="password" name="password" id="password" placeholder="ingrese su contraseña:" class="form-control">
-						<input type="submit" name="btn" class="btn btn-primary" id="btn" value="Acceder">
-					</form>
-				</div>
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+								<div class="bienvenidos">
+									<h1>Bienvenidos</h1>
+									<button class="btn btn-warning">salir</button>
+									<div class="buscador">
+										<input type="text" name="usuarios" id="Buscar" class="form-control" placeholder="Buscar Usuarios">
+										<div class="paginas">
+											<select id="maxRows" class="form-control" style="width:10%;display: inline-block;"></select>
+										</div>
+												<nav>
+													<ul class="nav nav-pills pagination"></ul>
+												</nav>
+									</div>
+									<table class="table table-striped" id="mytable">
+										<thead>
+											<th>ID</th><th>Nombre</th><th>Apellido</th><th>Avatar</th>
+										</thead>
+										<tbody class="table-borderd">
+										</tbody>
+									</table>
+								</div>
+					</div>
+					<div class="col-md-2">	
+					</div>
+		</div>	
+</div>
+<!--contenedor del modal-->
+<div class="container">
+		<div class="modal fade" id="myModal" role="dialog">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h4 class="modal-title">Usuario</h4>
+			  </div>
+			  <div class="modal-body">
+			  </div>
+			  <div class="modal-footer">
+			  </div>
 			</div>
-			<div class="col-md-4">
-				
-			</div>
-		</div>
-	</div>
+		  </div>
+		</div>	
+</div>
 </body>
 </html>

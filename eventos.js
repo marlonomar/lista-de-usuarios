@@ -1,24 +1,7 @@
 $(function(){ 
     /*----start session--------------------------------------------------------------------*/
-    session();
-    boton();
     obtenerdatos(); 
-   function session(){
-       let date= new Date;
-       let dateStart= date.getTime();
-       let dateEnd = localStorage.getItem('timeExpiration');
-       let time = dateEnd - dateStart;
-       console.log(time);
 
-       if ( dateStart >= dateEnd ){
-           deleteLocalStorage ()}
-
-       else{
-           setTimeout(function(){
-               deleteLocalStorage ()
-           },time);
-       }
-   }  
     /*----call users to table--------------------------------------------------------------*/
    callAjax(users);
    function users(){
@@ -52,12 +35,7 @@ $(function(){
        localStorage.clear();
        window.location = "index.html";
    }
-   /* ----- button out---------------------------------------------------------------------*/
-   function boton(){
-       $(".btn:first").click(function(){
-           deleteLocalStorage ()
-   });
-   }
+   
    /* ------------list Users in select ----------------------------------------------------*/
    function select(){
     var table = '#mytable';
